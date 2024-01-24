@@ -9,6 +9,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,14 +29,36 @@ class ChatResource extends Resource
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('chat_id')->label('Chat ID')->searchable(),
+                TextColumn::make('first_name')->label('First Name')->searchable(),
+                TextColumn::make('last_name')->label('Last Name')->searchable(),
+                TextColumn::make('username')->label('Username')->searchable(),
+                TextColumn::make('type')->label('Type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'private' => 'primary',
+                        'group' => 'secondary',
+                        'supergroup' => 'success',
+                        'channel' => 'warning',
+                    })
+                    ->sortable(),
+
             ])
             ->filters([
-                //
+                SelectFilter::make('type')
+                    ->options([
+                        'private' => 'Private',
+                        'group' => 'Group',
+                        'supergroup' => 'Supergroup',
+                        'channel' => 'Channel',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
