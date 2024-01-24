@@ -16,6 +16,11 @@ class ChatRepository implements ChatInterface
         return DB::table('chats')->where('chat_id', $chat_id)->exists();
     }
 
+    public function getLang(string $chat_id): ?string
+    {
+        return DB::table('chats')->where('chat_id', $chat_id)->value('lang');
+    }
+
     public function store(Chat $chat, User $from): void
     {
 
@@ -30,7 +35,9 @@ class ChatRepository implements ChatInterface
                 'last_name' => $chat->last_name,
                 'username' => $chat->username,
                 'type' => $chat->type,
-                'from' => json_encode($from)
+                'from' => json_encode($from),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
     }
 }
