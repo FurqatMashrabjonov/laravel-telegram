@@ -2,6 +2,7 @@
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
 use App\Telegram\Commands\Start;
+use App\Telegram\Middleware\ChatExists;
 use SergiX44\Nutgram\Nutgram;
 
 /*
@@ -14,13 +15,10 @@ use SergiX44\Nutgram\Nutgram;
 |
 */
 
-//Middlewares
-
-//$bot->middleware(function (Nutgram $bot, $next) {
-//    Log::debug('bu middleware ');
-//});
+//Global Middlewares
+$bot->middleware(ChatExists::class);
 
 
 //Commands
-$bot->onCommand('start', Start::class)->description('The start command!')
-->middleware(\App\Telegram\Middleware\ChatExists::class);
+$bot->onCommand('start', Start::class);
+
