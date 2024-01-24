@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chat extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'chat_id',
+        'first_name',
+        'last_name',
+        'username',
+        'type',
+        'from'
+    ];
+
+
+    protected $casts = [
+      'form' => 'array'
+    ];
+
 }

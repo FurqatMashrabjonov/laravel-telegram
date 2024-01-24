@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            $table->string('chat_id')->unique();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('username')->nullable();
+            $table->string('type');
+            $table->json('from');
             $table->timestamps();
         });
     }
