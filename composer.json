@@ -11,6 +11,7 @@
         "php": "^8.1",
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
+        "ibrahimbougaoua/radiobuttonimage": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.2",
         "laravel/sanctum": "^3.3",

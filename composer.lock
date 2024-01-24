@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cac4ed0f673b0b83a7fd410182fd940d",
+    "content-hash": "7db052fd02bb8884c6e27f975a93c081",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2244,6 +2244,80 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "ibrahimbougaoua/radiobuttonimage",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ibrahimBougaoua/RadioButtonImage.git",
+                "reference": "d33e8affa89669180d9e83abe2645947584294d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ibrahimBougaoua/RadioButtonImage/zipball/d33e8affa89669180d9e83abe2645947584294d4",
+                "reference": "d33e8affa89669180d9e83abe2645947584294d4",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0|^3.0-stable",
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "IbrahimBougaoua\\RadioButtonImage\\RadioButtonImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "RadioButtonImage": "IbrahimBougaoua\\RadioButtonImage\\Facades\\RadioButtonImage"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "IbrahimBougaoua\\RadioButtonImage\\": "src/",
+                    "IbrahimBougaoua\\RadioButtonImage\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ibrahim",
+                    "email": "ibrahim.bougaoua@etu.usthb.dz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is my package radiobuttonimage",
+            "homepage": "https://github.com/ibrahimbougaoua/radiobuttonimage",
+            "keywords": [
+                "ibrahimBougaoua",
+                "laravel",
+                "radiobuttonimage"
+            ],
+            "support": {
+                "issues": "https://github.com/ibrahimBougaoua/RadioButtonImage/issues",
+                "source": "https://github.com/ibrahimBougaoua/RadioButtonImage/tree/v1.0.0"
+            },
+            "time": "2023-08-17T16:42:19+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",

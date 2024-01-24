@@ -1,7 +1,9 @@
 <?php
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
+use App\Telegram\Actions\SetLanguage;
 use App\Telegram\Commands\Language;
+use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
 use App\Telegram\Middleware\ChatExists;
 use SergiX44\Nutgram\Nutgram;
@@ -23,4 +25,35 @@ $bot->middleware(ChatExists::class);
 //Commands
 $bot->onCommand('start', Start::class);
 $bot->onCommand('lang', Language::class);
+$bot->onCommand('phone', Phone::class);
 
+
+
+
+//Set Language
+$bot->onText('🇺🇿O\'zbekcha', function (Nutgram $bot) {
+    SetLanguage::set($bot->chat()->id, 'uz');
+    $bot->sendMessage('uzbek!');
+});
+$bot->onText('🇷🇺Русский', function (Nutgram $bot) {
+    SetLanguage::set($bot->chat()->id, 'ru');
+    $bot->sendMessage('russian!');
+});
+$bot->onText('🇬🇧English', function (Nutgram $bot) {
+    SetLanguage::set($bot->chat()->id, 'en');
+    $bot->sendMessage('english!');
+});
+
+
+$bot->onCallbackQueryData('set_lang:uz', function(Nutgram $bot){
+    SetLanguage::set($bot->chat()->id, 'uz');
+    $bot->answerCallbackQuery(text: 'uzbekcha');
+});
+$bot->onCallbackQueryData('set_lang:ru', function(Nutgram $bot){
+    SetLanguage::set($bot->chat()->id, 'ru');
+    $bot->answerCallbackQuery(text: 'russian');
+});
+$bot->onCallbackQueryData('set_lang:en', function(Nutgram $bot){
+    SetLanguage::set($bot->chat()->id, 'en');
+    $bot->answerCallbackQuery(text: 'english');
+});

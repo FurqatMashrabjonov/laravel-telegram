@@ -40,6 +40,7 @@ class ChatResource extends Resource
                 TextColumn::make('first_name')->label('First Name')->searchable(),
                 TextColumn::make('last_name')->label('Last Name')->searchable(),
                 TextColumn::make('username')->label('Username')->searchable(),
+                TextColumn::make('phone_number')->label('Phone Number')->searchable(),
                 TextColumn::make('lang')->sortable()->badge(),
                 TextColumn::make('type')->label('Type')
                     ->badge()

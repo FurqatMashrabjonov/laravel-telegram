@@ -1,27 +1,49 @@
 <?php
 
 
-
-if (!function_exists('lang')){
-    function lang(string $key, string $lang, array $params = []){
+if (!function_exists('lang')) {
+    function text(string $key, string $lang = 'uz', array $params = [])
+    {
         $texts = app('texts');
 
-        if (!isset($texts[$key])){
+        if (!isset($texts[$key])) {
             return $key;
         }
 
         $text = $texts[$key];
 
-        if (!isset($text[$lang])){
+        if (!isset($text[$lang])) {
             return $key;
         }
 
         $text = $text[$lang];
 
-        foreach ($params as $param => $value){
+        foreach ($params as $param => $value) {
             $text = str_replace(":$param", $value, $text);
         }
 
         return $text;
+    }
+}
+
+
+if (!function_exists('settings')) {
+    function settings(string $key, string $default = null)
+    {
+        $settings = app('settings');
+
+        if (!isset($settings[$key])) {
+            return $default;
+        }
+
+        return $settings[$key];
+    }
+}
+
+
+if (!function_exists('lang')) {
+    function lang(string $chat_id)
+    {
+       return \Illuminate\Support\Facades\DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
     }
 }

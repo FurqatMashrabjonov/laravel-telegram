@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Settings;
 use App\Models\Text;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -28,5 +29,13 @@ class AppServiceProvider extends ServiceProvider
                 return $texts;
             });
         }
+
+//        if (Schema::hasTable('settings')) {
+//            $settings = Settings::query()->pluck('value', 'key')->toArray();
+//
+//            $this->app->singleton('languages', function () use ($settings) {
+//                return $settings;
+//            });
+//        }
     }
 }

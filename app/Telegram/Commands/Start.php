@@ -13,6 +13,9 @@ class Start extends Command
 
     public function handle(Nutgram $bot): void
     {
-        $bot->sendMessage('This is a command!');
+        $bot->sendMessage(
+            text: text('start', 'uz', ['name' => $bot->message()->from->first_name]),
+        );
+
     }
 }

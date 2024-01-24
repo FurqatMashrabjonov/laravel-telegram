@@ -12,11 +12,21 @@ class ReplyMarkupKeyboards
     {
         return ReplyKeyboardMarkup::make(
             resize_keyboard: true,
-            one_time_keyboard: true
+            one_time_keyboard: true,
         )->addRow(
             KeyboardButton::make('🇺🇿O\'zbekcha'),
             KeyboardButton::make('🇷🇺Русский'),
             KeyboardButton::make('🇬🇧English'),
+        );
+    }
+
+    public static function phone(): ReplyKeyboardMarkup
+    {
+        return ReplyKeyboardMarkup::make(
+            resize_keyboard: true,
+            one_time_keyboard: true
+        )->addRow(
+            KeyboardButton::make('📱Send my phone number')
         );
     }
 
