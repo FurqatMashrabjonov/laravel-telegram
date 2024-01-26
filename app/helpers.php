@@ -28,7 +28,16 @@ if (!function_exists('lang')) {
 
 
 if (!function_exists('settings')) {
-    function settings(string $key, string $default = null)
+
+    //php doc for see accepted keys with variants
+    /**
+     * @param string $key
+     * @param string|null $default
+     * @return mixed
+     */
+
+
+    function settings(string $key, string $default = null): mixed
     {
         $settings = app('settings');
 

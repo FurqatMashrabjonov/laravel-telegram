@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Settings;
 use App\Models\Text;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,20 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (Schema::hasTable('texts')) {
-            $texts = Text::query()->pluck('text', 'key')->toArray();
 
-            $this->app->singleton('texts', function () use ($texts) {
-                return $texts;
-            });
-        }
+        $texts = Text::query()->pluck('text', 'key')->toArray();
+        $settings = Settings::query()->first();
 
-//        if (Schema::hasTable('settings')) {
-//            $settings = Settings::query()->pluck('value', 'key')->toArray();
-//
-//            $this->app->singleton('languages', function () use ($settings) {
-//                return $settings;
-//            });
-//        }
+        $this->app->singleton('texts', function () use ($texts) {
+            return $texts;
+        });
+
+        $this->app->singleton('settings', function () use ($settings) {
+            return collect($settings)->filter(fn($value, $key) => $key !== 'id')->toArray();
+        });
     }
+
 }

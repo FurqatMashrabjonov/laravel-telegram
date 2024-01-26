@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->boolean('enable_language_selection')->default(true);
+            $table->boolean('enable_phone_number')->default(false);
+            $table->string('language_selection_mode')->default('markup');
         });
     }
 

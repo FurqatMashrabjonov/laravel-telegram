@@ -6,6 +6,8 @@ use App\Telegram\Commands\Language;
 use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
 use App\Telegram\Middleware\ChatExists;
+use App\Telegram\Middleware\CheckLanguage;
+use App\Telegram\Middleware\CheckPhone;
 use SergiX44\Nutgram\Nutgram;
 
 /*
@@ -21,13 +23,18 @@ use SergiX44\Nutgram\Nutgram;
 //Global Middlewares
 $bot->middleware(ChatExists::class);
 
-
 //Commands
 $bot->onCommand('start', Start::class);
 $bot->onCommand('lang', Language::class);
 $bot->onCommand('phone', Phone::class);
 
 
+//Test command
+$bot->onCommand('test', function (Nutgram $bot) {
+    $bot->sendMessage('test');
+})
+    ->middleware(CheckLanguage::class)
+    ->middleware(CheckPhone::class);
 
 
 //Set Language

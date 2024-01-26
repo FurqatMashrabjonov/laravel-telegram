@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
          ]);
 
          $this->call(TextSeeder::class);
+         $this->call(SettingsSeeder::class);
     }
 }

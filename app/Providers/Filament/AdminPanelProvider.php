@@ -2,9 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\ChatResource;
+use App\Filament\Resources\SettingsResource;
+use App\Filament\Resources\TextResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -53,6 +58,21 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
+                return $builder->groups([
+                    NavigationGroup::make('General')
+                        ->items([
+                            ...Pages\Dashboard::getNavigationItems(),
+                            ...SettingsResource::getNavigationItems(),
+                            ...TextResource::getNavigationItems()
+                        ]),
+                    NavigationGroup::make('Telegram')
+                        ->items([
+                            ...ChatResource::getNavigationItems()
+                        ]),
+                ]);
+            });
+
     }
 }

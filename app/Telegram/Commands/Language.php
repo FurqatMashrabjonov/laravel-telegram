@@ -14,6 +14,6 @@ class Language extends Command
 
     public function handle(Nutgram $bot): void
     {
-        AskLanguage::ask($bot);
+        AskLanguage::ask($bot, settings('language_selection_mode'));
     }
 }

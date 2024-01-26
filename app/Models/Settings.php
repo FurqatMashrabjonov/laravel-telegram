@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
     protected $table = 'settings';
+
+    protected $fillable = [
+        'enable_language_selection',
+        'enable_phone_number',
+        'language_selection_mode',
+    ];
+
+    public $timestamps = false;
 }

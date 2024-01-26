@@ -23,7 +23,6 @@ class ChatRepository implements ChatInterface
 
     public function store(Chat $chat, User $from): void
     {
-
         $from = collect($from->toArray())->filter(function ($value, $key){
             return !in_array($key, ['_bot', '_extra']);
         })->toArray();

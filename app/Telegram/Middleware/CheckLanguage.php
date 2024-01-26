@@ -18,9 +18,14 @@ class CheckLanguage
     public function __invoke(Nutgram $bot, $next): void
     {
 
+        if (!settings('enable_language_selection')) {
+            $next($bot);
+            return;
+        }
+
         if ($this->chatRepository->getLang($bot->chat()->id) === null) {
 
-            AskLanguage::ask($bot);
+            AskLanguage::ask($bot, settings('language_selection_mode'));
 
             return;
         }
