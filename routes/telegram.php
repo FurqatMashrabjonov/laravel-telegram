@@ -6,10 +6,9 @@ use App\Telegram\Commands\Language;
 use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
 use App\Telegram\Middleware\ChatExists;
-use App\Telegram\Middleware\CheckLanguage;
-use App\Telegram\Middleware\CheckPhone;
+use App\Telegram\Middleware\CheckBanned;
 use SergiX44\Nutgram\Nutgram;
-
+use Filament\Notifications\Actions\Action;
 /*
 |--------------------------------------------------------------------------
 | Nutgram Handlers
@@ -22,6 +21,7 @@ use SergiX44\Nutgram\Nutgram;
 
 //Global Middlewares
 $bot->middleware(ChatExists::class);
+$bot->middleware(CheckBanned::class);
 
 //Commands
 $bot->onCommand('start', Start::class);
@@ -33,11 +33,24 @@ $bot->onCommand('phone', Phone::class);
 $bot->onCommand('test', function (Nutgram $bot) {
     $bot->sendMessage('test');
 
-    \Filament\Notifications\Notification::make()->title('test')->sendToDatabase(\App\Models\User::first());
+    $admin = \App\Models\User::find(config('admin.admin_id'));
 
-})
-    ->middleware(CheckLanguage::class)
-    ->middleware(CheckPhone::class);
+    \Filament\Notifications\Notification::make()
+        ->title('User sent a message')
+        ->success()
+        ->color('green')
+        ->actions([
+            Action::make('view')
+                ->button()
+                ->url(route('dashboard'), shouldOpenInNewTab: true)->markAsRead(),
+            Action::make('undo')
+                ->color('gray'),
+        ])
+        ->sendToDatabase($admin);
+
+});
+//    ->middleware(CheckLanguage::class)
+//    ->middleware(CheckPhone::class);
 
 
 //Set Language

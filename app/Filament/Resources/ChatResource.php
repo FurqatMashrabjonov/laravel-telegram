@@ -4,10 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
 use App\Models\Chat;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -41,14 +43,16 @@ class ChatResource extends Resource
                 TextColumn::make('lang')->sortable()->badge(),
                 TextColumn::make('type')->label('Type')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'private' => 'primary',
                         'group' => 'secondary',
                         'supergroup' => 'success',
                         'channel' => 'warning',
                     })
                     ->sortable(),
-
+                TextColumn::make('created_at')
+                    ->label('Created At')
+                    ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('type')
@@ -60,18 +64,20 @@ class ChatResource extends Resource
                     ]),
             ])
             ->actions([
-                //make an action button to open modal and send message to user
-                Action::make('send_message')
-                    ->label('Send Message')
-                    ->icon('heroicon-o-home'),
-//                    ->modal(Dashboard::class)
-//                    ->confirm(fn (Chat $chat) => 'Are you sure you want to send a message to '),
-                Tables\Actions\EditAction::make(),
+                Action::make('ban')
+                    ->label(fn(Chat $chat): string => $chat->banned ? 'Blocked' : 'Allowed')
+                    ->icon(fn(Chat $chat): string => $chat->banned ? 'heroicon-o-exclamation-triangle' : 'heroicon-o-check')
+                    ->color(fn(Chat $chat): string => $chat->banned ? 'danger' : 'primary')
+                    ->requiresConfirmation()
+                    ->action(function (array $data, Chat $chat): void {
+                        $chat->banned = !$chat->banned;
+                        $chat->save();
+                    }),
+//                Tables\Actions\EditAction::make(),
+
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
