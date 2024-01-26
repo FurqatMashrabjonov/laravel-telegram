@@ -32,6 +32,9 @@ $bot->onCommand('phone', Phone::class);
 //Test command
 $bot->onCommand('test', function (Nutgram $bot) {
     $bot->sendMessage('test');
+
+    \Filament\Notifications\Notification::make()->title('test')->sendToDatabase(\App\Models\User::first());
+
 })
     ->middleware(CheckLanguage::class)
     ->middleware(CheckPhone::class);
@@ -54,13 +57,16 @@ $bot->onText('🇬🇧English', function (Nutgram $bot) {
 
 $bot->onCallbackQueryData('set_lang:uz', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'uz');
+    $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
     $bot->answerCallbackQuery(text: 'uzbekcha');
 });
 $bot->onCallbackQueryData('set_lang:ru', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'ru');
+    $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
     $bot->answerCallbackQuery(text: 'russian');
 });
 $bot->onCallbackQueryData('set_lang:en', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'en');
+    $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
     $bot->answerCallbackQuery(text: 'english');
 });

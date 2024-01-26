@@ -25,7 +25,7 @@ class CheckLanguage
 
         if ($this->chatRepository->getLang($bot->chat()->id) === null) {
 
-            AskLanguage::ask($bot, settings('language_selection_mode'));
+            AskLanguage::ask($bot);
 
             return;
         }

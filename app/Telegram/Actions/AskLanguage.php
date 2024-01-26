@@ -9,11 +9,15 @@ use SergiX44\Nutgram\Nutgram;
 class AskLanguage
 {
 
-    public static function ask(Nutgram $bot, string $mode = 'markup'): void
+    public static function ask(Nutgram $bot): void
     {
         $bot->sendMessage(
-            text: text('ask_language'),
-            reply_markup: $mode == 'inline' ?  InlineKeyboards::language() : ReplyMarkupKeyboards::language()
+            text: text('lang.ask_language'),
+            reply_markup: match (settings('language_selection_mode')) {
+                'inline' => InlineKeyboards::language(),
+                'reply' => ReplyMarkupKeyboards::language(),
+                default => null
+            }
         );
     }
 

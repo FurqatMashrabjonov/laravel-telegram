@@ -26,7 +26,10 @@ class ReplyMarkupKeyboards
             resize_keyboard: true,
             one_time_keyboard: true
         )->addRow(
-            KeyboardButton::make('📱Send my phone number')
+            KeyboardButton::make(
+                text: '📱Send my phone number',
+                request_contact: true
+            )
         );
     }
 

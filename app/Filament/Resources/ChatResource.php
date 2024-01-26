@@ -3,17 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
-use App\Filament\Resources\ChatResource\RelationManagers;
 use App\Models\Chat;
-use Filament\Forms;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ChatResource extends Resource
 {
@@ -63,6 +60,12 @@ class ChatResource extends Resource
                     ]),
             ])
             ->actions([
+                //make an action button to open modal and send message to user
+                Action::make('send_message')
+                    ->label('Send Message')
+                    ->icon('heroicon-o-home'),
+//                    ->modal(Dashboard::class)
+//                    ->confirm(fn (Chat $chat) => 'Are you sure you want to send a message to '),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -86,5 +89,10 @@ class ChatResource extends Resource
             'create' => Pages\CreateChat::route('/create'),
             'edit' => Pages\EditChat::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
