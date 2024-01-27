@@ -3,6 +3,7 @@
 namespace App\Telegram\Commands;
 
 use App\Telegram\Actions\AskPhone;
+use App\Telegram\Conversations\PhoneNumberWithConfirmationConversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Handlers\Type\Command;
 
@@ -14,6 +15,7 @@ class Phone extends Command
 
     public function handle(Nutgram $bot): void
     {
-        AskPhone::ask($bot);
+//        AskPhone::ask($bot);
+        PhoneNumberWithConfirmationConversation::begin($bot);
     }
 }

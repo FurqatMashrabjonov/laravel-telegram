@@ -16,6 +16,10 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use SergiX44\Nutgram\Nutgram;
 
 class SettingsResource extends Resource
 {
@@ -23,16 +27,37 @@ class SettingsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Section::make('Telegram Bot Settings')
+                    ->description(new HtmlString('This section is related to the Telegram bot. <br> <b>Bot Name:</b> <a href="https://t.me/'. settings('bot_username').'" target="_blank">@' . settings('bot_full_name'). '</a>'))
+                    ->aside()
+                    ->schema([
+                        TextInput::make('bot_token')
+                            ->label('Bot Token')
+                            ->helperText('Enter the bot token you received from @BotFather.'),
+                        TextInput::make('webhook_url')
+                            ->label('Webhook URL')
+                            ->helperText('Enter the website url address. Example: https://example.uz. Domain must be https.'),
+                        Toggle::make('webhook_was_set')
+//                            ->requiredUnless('webhook_url', 'bot_token')
+                            ->label('Run Telegram Bot')
+                            ->helperText('If you enable this option, the bot will start working. If you disable this option, the bot will stop working.'),
+
+                    ]),
                 Section::make('Language Selection')
                     ->description('This section is related to the language selection feature.')
                     ->aside()
                     ->schema([
                         Toggle::make('enable_language_selection')
                             ->label('Enable Language Selection')
+                            ->live()
                             ->helperText('If you enable this option, the user will be asked to select a language when they first start the bot.'),
                         Select::make('language_selection_mode')
                             ->label('Language Selection Mode')

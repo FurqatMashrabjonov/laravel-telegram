@@ -17,6 +17,7 @@ class SettingsSeeder extends Seeder
             'enable_language_selection' => true,
             'enable_phone_number' => false,
             'language_selection_mode' => 'markup',
+            'key' => 'main'
         ];
 
          Settings::query()->create($settings);

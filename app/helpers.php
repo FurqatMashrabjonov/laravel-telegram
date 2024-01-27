@@ -1,6 +1,9 @@
 <?php
 
 
+use App\Models\Settings;
+use SergiX44\Nutgram\Nutgram;
+
 if (!function_exists('lang')) {
     function text(string $key, string $lang = 'uz', array $params = [])
     {
@@ -39,6 +42,10 @@ if (!function_exists('settings')) {
 
     function settings(string $key, string $default = null): mixed
     {
+        if ($key == null & $default == null) {
+            return Settings::query()->first();
+        }
+
         $settings = app('settings');
 
         if (!isset($settings[$key])) {
@@ -53,6 +60,17 @@ if (!function_exists('settings')) {
 if (!function_exists('lang')) {
     function lang(string $chat_id)
     {
-       return \Illuminate\Support\Facades\DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
+       return \DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
+    }
+}
+
+if (!function_exists('bot')){
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    function bot(string $token = null): Nutgram
+    {
+        return new Nutgram($token ?? settings('bot_token'));
     }
 }

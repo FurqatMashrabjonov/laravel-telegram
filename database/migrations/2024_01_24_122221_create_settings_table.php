@@ -13,9 +13,17 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('key');
             $table->boolean('enable_language_selection')->default(true);
             $table->boolean('enable_phone_number')->default(false);
             $table->string('language_selection_mode')->default('markup');
+
+            //bot configurations
+            $table->string('bot_token')->nullable();
+            $table->string('bot_username')->nullable();
+            $table->string('bot_full_name')->nullable();
+            $table->string('webhook_url')->nullable();
+            $table->boolean('webhook_was_set')->default(false);
         });
     }
 

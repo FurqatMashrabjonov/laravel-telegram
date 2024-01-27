@@ -31,23 +31,7 @@ $bot->onCommand('phone', Phone::class);
 
 //Test command
 $bot->onCommand('test', function (Nutgram $bot) {
-    $bot->sendMessage('test');
-
-    $admin = \App\Models\User::find(config('admin.admin_id'));
-
-    \Filament\Notifications\Notification::make()
-        ->title('User sent a message')
-        ->success()
-        ->color('green')
-        ->actions([
-            Action::make('view')
-                ->button()
-                ->url(route('dashboard'), shouldOpenInNewTab: true)->markAsRead(),
-            Action::make('undo')
-                ->color('gray'),
-        ])
-        ->sendToDatabase($admin);
-
+    $bot->sendMessage('test' . \Illuminate\Support\Number::percentage(microtime(true) - LARAVEL_START));
 });
 //    ->middleware(CheckLanguage::class)
 //    ->middleware(CheckPhone::class);

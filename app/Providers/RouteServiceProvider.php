@@ -37,6 +37,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        Route::redirect('/admin/settings', '/admin/settings/1/edit');
+        Route::redirect('/admin/settings', '/admin/settings/main/edit');
     }
 }

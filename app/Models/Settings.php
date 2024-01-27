@@ -13,7 +13,20 @@ class Settings extends Model
         'enable_language_selection',
         'enable_phone_number',
         'language_selection_mode',
+        'bot_token',
+        'bot_username',
+        'bot_full_name',
+        'webhook_url',
+        'webhook_was_set',
+
     ];
 
     public $timestamps = false;
+
+
+    public function getRouteKeyName(): string
+    {
+        return 'key';
+    }
+
 }
