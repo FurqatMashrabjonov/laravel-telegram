@@ -12,6 +12,7 @@
         "bezhansalleh/filament-language-switch": "^3.0",
         "filament/filament": "^3.2",
         "filament/notifications": "^3.2",
+        "filipfonal/filament-log-manager": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.2",

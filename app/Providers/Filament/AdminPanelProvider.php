@@ -15,6 +15,8 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use FilipFonal\FilamentLogManager\FilamentLogManager;
+use FilipFonal\FilamentLogManager\Pages\Logs;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -61,20 +63,26 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->plugins([
+                FilamentLogManager::make(),
+            ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder->groups([
-                    NavigationGroup::make('General')
+                    NavigationGroup::make(__('navigation.general'))
                         ->items([
                             ...Pages\Dashboard::getNavigationItems(),
                             ...SettingsResource::getNavigationItems(),
-                            ...TextResource::getNavigationItems()
+                            ...TextResource::getNavigationItems(),
                         ]),
-                    NavigationGroup::make('Telegram')
+                    NavigationGroup::make(__('navigation.telegram'))
                         ->items([
                             ...ChatResource::getNavigationItems()
                         ]),
+                    NavigationGroup::make(__('navigation.system'))
+                        ->items([
+                            ...Logs::getNavigationItems()
+                        ]),
                 ]);
             });
-
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SettingsResource\Pages;
 use App\Models\Settings;
 use App\Telegram\Services\HtmlHelper;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -28,6 +29,11 @@ class SettingsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('navigation.settings');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,14 +45,14 @@ class SettingsResource extends Resource
                         TextInput::make('bot_token')
                             ->label(__('settings.bot_token'))
                             ->required()
-                            ->helperText(new HtmlString('Enter the bot token you received from <a href="https://t.me/BotFather" class="inline-flex items-center rounded-md dark:bg-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" target="_blank">@BotFather</a>')),
+                            ->helperText(new HtmlString(__('settings.bot_token_helper') . ' <a href="https://t.me/BotFather" class="inline-flex items-center rounded-md dark:bg-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" target="_blank">@BotFather</a>')),
                         TextInput::make('webhook_url')
                             ->label(__('settings.webhook_url'))
                             ->required()
-                            ->helperText('Enter the website url address. Example: https://example.uz. Domain must be https.'),
+                            ->helperText(__('settings.webhook_url_helper')),
                         Toggle::make('webhook_was_set')
                             ->label(__('settings.run_telegram_bot'))
-                            ->helperText('If you enable this option, the bot will start working. If you disable this option, the bot will stop working.'),
+                            ->helperText(__('settings.run_telegram_bot_helper')),
 
                     ]),
                 Section::make(__('settings.language_selection_settings'))
@@ -56,7 +62,7 @@ class SettingsResource extends Resource
                         Toggle::make('enable_language_selection')
                             ->label(__('settings.enable_language_selection'))
                             ->live()
-                            ->helperText('If you enable this option, the user will be asked to select a language when they first start the bot.'),
+                            ->helperText(__('settings.enable_language_selection_helper')),
                         Select::make('language_selection_mode')
                             ->label(__('settings.language_selection_mode'))
                             ->options([
@@ -65,16 +71,18 @@ class SettingsResource extends Resource
                             ])->maxWidth(MaxWidth::Medium)
                             ->native(false)
                             ->required()
-//                            ->helperText('If you select the "Inline" option, the user will be asked to select a language in the same message. If you select the "Markup" option, the user will be asked to select a language in a separate message.'),
+                            ->createOptionAction(
+                                fn (Action $action) => $action->modalWidth('3xl'),
+                            )
                             ->helperText(new HtmlString(HtmlHelper::languageSelectionMode()))
                     ]),
-                Section::make('Phone Number')
-                    ->description('This section is related to the phone number feature.')
+                Section::make(__('settings.phone_number'))
+                    ->description(__('settings.phone_number_description'))
                     ->aside()
                     ->schema([
                         Toggle::make('enable_phone_number')
-                            ->label('Enable Phone Number')
-                            ->helperText('If you enable this option, the user will be asked to send their phone number when they first start the bot.'),
+                            ->label(__('settings.enable_phone_number'))
+                            ->helperText(__('settings.enable_phone_number_helper')),
 
                     ]),
             ])->columns(1);

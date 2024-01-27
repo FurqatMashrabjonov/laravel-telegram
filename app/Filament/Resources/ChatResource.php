@@ -18,6 +18,11 @@ class ChatResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('navigation.chats');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

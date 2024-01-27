@@ -20,6 +20,11 @@ class TextResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('navigation.texts');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
