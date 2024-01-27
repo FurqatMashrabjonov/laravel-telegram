@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Settings;
 use App\Models\Text;
 use App\Observers\SettingsObserver;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -40,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
 
         //Set global config token
         Config::set('nutgram.token', settings('bot_token'));
+
+        //Localization for Admin panel
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['uz', 'ru', 'en']); // also accepts a closure
+        });
     }
 
 }

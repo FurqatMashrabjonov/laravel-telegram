@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SettingsResource\Pages;
 use App\Models\Settings;
+use App\Telegram\Services\HtmlHelper;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -27,48 +28,45 @@ class SettingsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('Telegram Bot Settings')
-                    ->description(new HtmlString('This section is related to the Telegram bot. <br> <b>Bot Name:</b> <a href="https://t.me/'. settings('bot_username').'" target="_blank">@' . settings('bot_full_name'). '</a>'))
+                Section::make(__('settings.telegram_bot_settings'))
+                    ->description(new HtmlString(__('settings.telegram_bot_settings_description')))
                     ->aside()
                     ->schema([
                         TextInput::make('bot_token')
-                            ->label('Bot Token')
-                            ->helperText('Enter the bot token you received from @BotFather.'),
+                            ->label(__('settings.bot_token'))
+                            ->required()
+                            ->helperText(new HtmlString('Enter the bot token you received from <a href="https://t.me/BotFather" class="inline-flex items-center rounded-md dark:bg-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" target="_blank">@BotFather</a>')),
                         TextInput::make('webhook_url')
-                            ->label('Webhook URL')
+                            ->label(__('settings.webhook_url'))
+                            ->required()
                             ->helperText('Enter the website url address. Example: https://example.uz. Domain must be https.'),
                         Toggle::make('webhook_was_set')
-//                            ->requiredUnless('webhook_url', 'bot_token')
-                            ->label('Run Telegram Bot')
+                            ->label(__('settings.run_telegram_bot'))
                             ->helperText('If you enable this option, the bot will start working. If you disable this option, the bot will stop working.'),
 
                     ]),
-                Section::make('Language Selection')
-                    ->description('This section is related to the language selection feature.')
+                Section::make(__('settings.language_selection_settings'))
+                    ->description(__('settings.language_selection_settings_description'))
                     ->aside()
                     ->schema([
                         Toggle::make('enable_language_selection')
-                            ->label('Enable Language Selection')
+                            ->label(__('settings.enable_language_selection'))
                             ->live()
                             ->helperText('If you enable this option, the user will be asked to select a language when they first start the bot.'),
                         Select::make('language_selection_mode')
-                            ->label('Language Selection Mode')
+                            ->label(__('settings.language_selection_mode'))
                             ->options([
                                 'inline' => 'Inline',
                                 'markup' => 'Markup',
                             ])->maxWidth(MaxWidth::Medium)
                             ->native(false)
                             ->required()
-                            ->helperText('If you select the "Inline" option, the user will be asked to select a language in the same message. If you select the "Markup" option, the user will be asked to select a language in a separate message.'),
-
+//                            ->helperText('If you select the "Inline" option, the user will be asked to select a language in the same message. If you select the "Markup" option, the user will be asked to select a language in a separate message.'),
+                            ->helperText(new HtmlString(HtmlHelper::languageSelectionMode()))
                     ]),
                 Section::make('Phone Number')
                     ->description('This section is related to the phone number feature.')

@@ -15,7 +15,7 @@ class AskLanguage
             text: text('lang.ask_language'),
             reply_markup: match (settings('language_selection_mode')) {
                 'inline' => InlineKeyboards::language(),
-                'reply' => ReplyMarkupKeyboards::language(),
+                'markup' => ReplyMarkupKeyboards::language(),
                 default => null
             }
         );
