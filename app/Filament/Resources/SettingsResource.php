@@ -60,7 +60,7 @@ class SettingsResource extends Resource
                     ->aside()
                     ->schema([
                         Toggle::make('enable_language_selection')
-                            ->label(__('settings.enable_language_selection'))
+                            ->label(__('settings.enable_language_selection') . 'TODO://default language qo\'shish kerak')
                             ->live()
                             ->helperText(__('settings.enable_language_selection_helper')),
                         Select::make('language_selection_mode')

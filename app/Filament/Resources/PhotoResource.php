@@ -4,18 +4,25 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PhotoResource\Pages;
 use App\Models\Photo;
+use App\Telegram\Services\HtmlHelper;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class PhotoResource extends Resource
 {
     protected static ?string $model = Photo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('navigation.photos');
+    }
 
     public static function form(Form $form): Form
     {
@@ -28,19 +35,25 @@ class PhotoResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Action::make(__('button.how_to_use'))
+                    ->icon('heroicon-o-information-circle')
+                    ->color('info')
+                    ->modalContent(new HtmlString(HtmlHelper::languageSelectionMode()))
+            ])
             ->columns([
                 TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\ImageColumn::make('file_path')
-                    ->width(200)
-                    ->height(150),
-                TextColumn::make('file_name')->label(__(''))->sortable(),
+                    ->width(200),
+//                    ->height(150),
+                TextColumn::make('file_name')->label(__(''))->sortable()->searchable(),
                 TextColumn::make('file_size')->sortable()
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Action::make('Download')
+                Action::make(__('columns.download'))
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(fn(Photo $photo) => $photo->file_path)
             ])
@@ -66,4 +79,5 @@ class PhotoResource extends Resource
             'edit' => Pages\EditPhoto::route('/{record}/edit'),
         ];
     }
+
 }

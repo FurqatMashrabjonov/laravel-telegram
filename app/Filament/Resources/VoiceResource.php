@@ -17,7 +17,7 @@ class VoiceResource extends Resource
 {
     protected static ?string $model = Voice::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-speaker-wave';
 
     public static function getNavigationLabel(): string
     {

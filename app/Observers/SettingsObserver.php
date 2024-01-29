@@ -32,6 +32,5 @@ class SettingsObserver
                 bot($settings->bot_token)->deleteWebhook();
             }
         }
-
     }
 }

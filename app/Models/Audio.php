@@ -27,4 +27,9 @@ class Audio extends Model
     protected $casts = [
         'thumbnail' => 'array',
     ];
+
+    public function getDurationAttribute(): string
+    {
+        return gmdate('H:i:s', $this->attributes['duration']);
+    }
 }

@@ -13,4 +13,5 @@ return [
     'documents' => 'Документы',
     'videos' => 'Видео',
     'voices' => 'Голосовые',
+    'photos' => 'Фото',
 ];

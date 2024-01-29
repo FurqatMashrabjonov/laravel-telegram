@@ -5,6 +5,9 @@ return [
     'file_path' => 'Путь к файлу',
     'file_name' => 'Имя файла',
     'file_size' => 'Размер файла',
-    'download' => 'Скачать',
     'delete' => 'Удалить',
+    'download' => 'Скачать',
+    'thumbnail' => 'Миниатюра',
+    'mime_type' => 'Тип файла',
+
 ];

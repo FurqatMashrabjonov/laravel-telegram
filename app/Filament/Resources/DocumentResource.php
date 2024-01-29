@@ -19,7 +19,7 @@ class DocumentResource extends Resource
 {
     protected static ?string $model = Document::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
 
     public static function getNavigationLabel(): string
     {
@@ -49,7 +49,7 @@ class DocumentResource extends Resource
             ])
             ->actions([
 //                Tables\Actions\EditAction::make(),
-            Tables\Actions\Action::make(__('actions.download'))
+            Tables\Actions\Action::make(__('columns.download'))
                 ->icon('heroicon-o-document-arrow-down')
                 ->url(fn(Document $document) => $document->file_path)
             ])

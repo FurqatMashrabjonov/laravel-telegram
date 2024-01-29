@@ -22,4 +22,10 @@ return [
     'phone_number_description' => 'Ushbu bo\'lim telefon raqami xususiyatiga oid.',
     'enable_phone_number' => 'Telefon raqamni yoqish',
     'enable_phone_number_helper' => 'Agar ushbu parametrni yoqsangiz, foydalanuvchi botni birinchi marta ishga tushirganda telefon raqamini yuborishni so\'raydi.',
+    'bot_stopped' => 'Bot to\'xtatildi',
+    'bot_started' => 'Bot ishga tushirildi',
+    'bot_restarted' => 'Bot qayta ishga tushirildi',
+    'start_bot' => 'Botni ishga tushirish',
+    'stop_bot' => 'Botni to\'xtatish',
+    'restart_bot' => 'Botni qayta ishga tushirish',
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadMediaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/download/{model}/{file_unique_id}', [DownloadMediaController::class, 'download'])->name('download');

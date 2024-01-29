@@ -20,6 +20,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentView;
 use Filament\Widgets;
 use FilipFonal\FilamentLogManager\FilamentLogManager;
 use FilipFonal\FilamentLogManager\Pages\Logs;
@@ -29,12 +30,19 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+
+        FilamentView::registerRenderHook(
+            'panels::global-search.after',
+            fn (): string => Blade::render('<livewire:bot.control key=\'bot-control\' />')
+        );
+
         return $panel
             ->default()
             ->id('admin')

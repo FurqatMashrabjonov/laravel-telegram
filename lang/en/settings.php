@@ -22,4 +22,10 @@ return [
     'phone_number_description' => 'This section is related to the phone number feature.',
     'enable_phone_number' => 'Enable phone number',
     'enable_phone_number_helper' => 'If you enable this option, the user will be asked to send their phone number when they first start the bot.',
+    'bot_stopped' => 'Bot stopped',
+    'bot_started' => 'Bot started',
+    'bot_restarted' => 'Bot restarted',
+    'start_bot' => 'Start bot',
+    'stop_bot' => 'Stop bot',
+    'restart_bot' => 'Restart bot',
 ];

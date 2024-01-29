@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
 use App\Models\Chat;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -56,6 +58,12 @@ class ChatResource extends Resource
                 TextColumn::make('created_at')
                     ->label('Created At')
                     ->searchable(),
+                TextColumn::make('role')
+                    ->sortable()
+                    ->badge()->color(fn(string $state): string => match ($state) {
+                        'user' => 'primary',
+                        'admin' => 'danger',
+                    })
             ])
             ->filters([
                 SelectFilter::make('type')
@@ -76,8 +84,21 @@ class ChatResource extends Resource
                         $chat->banned = !$chat->banned;
                         $chat->save();
                     }),
-//                Tables\Actions\EditAction::make(),
+                Action::make('updateAuthor')
+                    ->form([
+                        TextInput::make('first_name')
+                            ->label('First Name')
+                            ->required(),
+                    ])
+                    ->action(function (array $data): void {
+                        // ...
+                    })
+                    ->infolist([
+                        TextEntry::make('firs_name')
 
+                    ])
+                    ->slideOver()
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

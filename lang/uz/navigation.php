@@ -13,4 +13,5 @@ return [
     'documents' => 'Hujjatlar',
     'videos' => 'Video',
     'voices' => 'Ovozli',
+    'photos' => 'Foto',
 ];

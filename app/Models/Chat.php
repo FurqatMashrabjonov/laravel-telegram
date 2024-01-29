@@ -16,7 +16,8 @@ class Chat extends Model
         'username',
         'type',
         'from',
-        'lang'
+        'lang',
+        'role'
     ];
 
 

@@ -6,6 +6,7 @@ use App\Models\Audio;
 use App\Models\Document;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\Voice;
 use App\Repositories\Interfaces\FileInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -79,13 +80,16 @@ class FileRepository implements FileInterface
 
     protected function storeDocument(): void
     {
-        Log::debug('storeDocument');
         $this->storeToDB(array_merge(
             $this->bot->message()->document->toArray(),
             [
                 'file_path' => $this->getFile($this->bot->message()->document->file_id)->url(),
                 'thumbnail_file_path' => $this->getFile($this->bot->message()->document->thumbnail->file_id)->url()
             ]), Document::class);
+    }
+
+    protected function storeVoice(){
+        $this->storeToDB(array_merge($this->bot->message()->voice->toArray(), []), Voice::class);
     }
 
     protected function exists(string $file_id, string $model): bool
