@@ -60,11 +60,11 @@ if (!function_exists('settings')) {
 if (!function_exists('lang')) {
     function lang(string $chat_id)
     {
-       return \DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
+        return \DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
     }
 }
 
-if (!function_exists('bot')){
+if (!function_exists('bot')) {
     /**
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
@@ -72,5 +72,13 @@ if (!function_exists('bot')){
     function bot(string $token = null): Nutgram
     {
         return new Nutgram($token ?? settings('bot_token'));
+    }
+}
+
+
+if (!function_exists('generateWebhookUrl')) {
+    function generateWebhookUrl(string $url): string
+    {
+        return rtrim($url, '/');
     }
 }

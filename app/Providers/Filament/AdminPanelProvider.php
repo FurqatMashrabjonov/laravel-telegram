@@ -2,14 +2,20 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\AudioResource;
 use App\Filament\Resources\ChatResource;
+use App\Filament\Resources\DocumentResource;
+use App\Filament\Resources\PhotoResource;
 use App\Filament\Resources\SettingsResource;
 use App\Filament\Resources\TextResource;
+use App\Filament\Resources\VideoResource;
+use App\Filament\Resources\VoiceResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -80,7 +86,18 @@ class AdminPanelProvider extends PanelProvider
                         ]),
                     NavigationGroup::make(__('navigation.system'))
                         ->items([
-                            ...Logs::getNavigationItems()
+                            NavigationItem::make('Telescope')
+                                ->url('/telescope')
+                                ->icon('heroicon-o-magnifying-glass'),
+                            ...Logs::getNavigationItems(),
+                        ]),
+                    NavigationGroup::make(__('navigation.media'))
+                        ->items([
+                            ...AudioResource::getNavigationItems(),
+                            ...DocumentResource::getNavigationItems(),
+                            ...VideoResource::getNavigationItems(),
+                            ...VoiceResource::getNavigationItems(),
+                            ...PhotoResource::getNavigationItems()
                         ]),
                 ]);
             });

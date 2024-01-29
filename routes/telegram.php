@@ -5,10 +5,10 @@ use App\Telegram\Actions\SetLanguage;
 use App\Telegram\Commands\Language;
 use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
+use App\Telegram\Commands\File;
 use App\Telegram\Middleware\ChatExists;
 use App\Telegram\Middleware\CheckBanned;
 use SergiX44\Nutgram\Nutgram;
-use Filament\Notifications\Actions\Action;
 /*
 |--------------------------------------------------------------------------
 | Nutgram Handlers
@@ -27,14 +27,13 @@ $bot->middleware(CheckBanned::class);
 $bot->onCommand('start', Start::class);
 $bot->onCommand('lang', Language::class);
 $bot->onCommand('phone', Phone::class);
+$bot->onCommand('file', File::class);
 
 
 //Test command
 $bot->onCommand('test', function (Nutgram $bot) {
     $bot->sendMessage('test' . \Illuminate\Support\Number::percentage(microtime(true) - LARAVEL_START));
 });
-//    ->middleware(CheckLanguage::class)
-//    ->middleware(CheckPhone::class);
 
 
 //Set Language

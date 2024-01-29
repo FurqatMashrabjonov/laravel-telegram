@@ -8,4 +8,9 @@ return [
     'general' => 'Umumiy',
     'telegram' => 'Telegram',
     'system' => 'Tizim',
+    'media'=> 'Media',
+    'audios' => 'Audio',
+    'documents' => 'Hujjatlar',
+    'videos' => 'Video',
+    'voices' => 'Ovozli',
 ];
