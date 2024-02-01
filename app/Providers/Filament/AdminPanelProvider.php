@@ -10,6 +10,7 @@ use App\Filament\Resources\SettingsResource;
 use App\Filament\Resources\TextResource;
 use App\Filament\Resources\VideoResource;
 use App\Filament\Resources\VoiceResource;
+use App\Filament\Widgets\ChatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -51,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Cyan
             ])
+            ->favicon(asset('images/favicon.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -59,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                ChatsOverview::class
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -97,7 +99,10 @@ class AdminPanelProvider extends PanelProvider
                             NavigationItem::make('Telescope')
                                 ->url('/telescope')
                                 ->icon('heroicon-o-magnifying-glass'),
-                            ...Logs::getNavigationItems(),
+                            NavigationItem::make('Log Viewer')
+                                ->url('/log-viewer')
+                                ->icon('heroicon-o-document-text'),
+
                         ]),
                     NavigationGroup::make(__('navigation.media'))
                         ->items([

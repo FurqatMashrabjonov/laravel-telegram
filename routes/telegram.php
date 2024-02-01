@@ -2,6 +2,7 @@
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
 use App\Telegram\Actions\SetLanguage;
+use App\Telegram\Commands\Contact;
 use App\Telegram\Commands\Language;
 use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
@@ -28,13 +29,7 @@ $bot->onCommand('start', Start::class);
 $bot->onCommand('lang', Language::class);
 $bot->onCommand('phone', Phone::class);
 $bot->onCommand('file', File::class);
-
-
-//Test command
-$bot->onCommand('test', function (Nutgram $bot) {
-    $bot->sendMessage('test' . \Illuminate\Support\Number::percentage(microtime(true) - LARAVEL_START));
-});
-
+$bot->onCommand('contact', Contact::class);
 
 //Set Language
 $bot->onText('🇺🇿O\'zbekcha', function (Nutgram $bot) {

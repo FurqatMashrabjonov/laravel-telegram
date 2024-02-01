@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('lang')->nullable();
             $table->string('type');
             $table->json('from');
             $table->boolean('banned')->default(false);
+            $table->string('role')->default('user');
             $table->timestamps();
         });
     }

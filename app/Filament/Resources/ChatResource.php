@@ -84,20 +84,7 @@ class ChatResource extends Resource
                         $chat->banned = !$chat->banned;
                         $chat->save();
                     }),
-                Action::make('updateAuthor')
-                    ->form([
-                        TextInput::make('first_name')
-                            ->label('First Name')
-                            ->required(),
-                    ])
-                    ->action(function (array $data): void {
-                        // ...
-                    })
-                    ->infolist([
-                        TextEntry::make('firs_name')
 
-                    ])
-                    ->slideOver()
 //                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -125,4 +112,5 @@ class ChatResource extends Resource
     {
         return static::getModel()::count();
     }
+
 }
