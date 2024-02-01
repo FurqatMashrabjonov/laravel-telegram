@@ -2,14 +2,9 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\AudioResource;
 use App\Filament\Resources\ChatResource;
-use App\Filament\Resources\DocumentResource;
-use App\Filament\Resources\PhotoResource;
 use App\Filament\Resources\SettingsResource;
 use App\Filament\Resources\TextResource;
-use App\Filament\Resources\VideoResource;
-use App\Filament\Resources\VoiceResource;
 use App\Filament\Widgets\ChatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -41,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
     {
         FilamentView::registerRenderHook(
             'panels::global-search.after',
-            fn(): string => Blade::render('<livewire:bot.control key=\'bot-control\' />')
+            fn (): string => Blade::render('<livewire:bot.control key=\'bot-control\' />')
         );
 
         return $panel
@@ -50,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Gray
+                'primary' => Color::Gray,
             ])
             ->favicon(asset('images/favicon.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -61,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                ChatsOverview::class
+                ChatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -73,7 +68,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SetTheme::class
+                SetTheme::class,
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('10s')
@@ -82,7 +77,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentLogManager::make(),
-                ThemesPlugin::make()
+                ThemesPlugin::make(),
             ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder->groups([
@@ -94,7 +89,7 @@ class AdminPanelProvider extends PanelProvider
                         ]),
                     NavigationGroup::make(__('navigation.telegram'))
                         ->items([
-                            ...ChatResource::getNavigationItems()
+                            ...ChatResource::getNavigationItems(),
                         ]),
                     NavigationGroup::make(__('navigation.system'))
                         ->items([

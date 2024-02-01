@@ -16,8 +16,9 @@ class ChatExists
 
     public function __invoke(Nutgram $bot, $next): void
     {
-        if (!$this->chatRepository->exists($bot->chat()->id))
+        if (! $this->chatRepository->exists($bot->chat()->id)) {
             $this->chatRepository->store($bot->chat(), $bot->message()->from);
+        }
 
         $next($bot);
     }

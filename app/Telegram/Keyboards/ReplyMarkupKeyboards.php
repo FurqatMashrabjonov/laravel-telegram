@@ -7,7 +7,6 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\ReplyKeyboardMarkup;
 
 class ReplyMarkupKeyboards
 {
-
     public static function language(): ReplyKeyboardMarkup
     {
         return ReplyKeyboardMarkup::make(
@@ -20,7 +19,7 @@ class ReplyMarkupKeyboards
         );
     }
 
-    public static function phone(string $lang = null): ReplyKeyboardMarkup
+    public static function phone(?string $lang = null): ReplyKeyboardMarkup
     {
         return ReplyKeyboardMarkup::make(
             resize_keyboard: true,
@@ -32,5 +31,4 @@ class ReplyMarkupKeyboards
             )
         );
     }
-
 }

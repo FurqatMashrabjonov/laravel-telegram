@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Settings;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
@@ -17,9 +16,9 @@ class SettingsSeeder extends Seeder
             'enable_language_selection' => true,
             'enable_phone_number' => false,
             'language_selection_mode' => 'markup',
-            'key' => 'main'
+            'key' => 'main',
         ];
 
-         Settings::query()->create($settings);
+        Settings::query()->create($settings);
     }
 }

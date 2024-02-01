@@ -17,12 +17,10 @@ class Chat extends Model
         'type',
         'from',
         'lang',
-        'role'
+        'role',
     ];
-
 
     protected $casts = [
-      'form' => 'array'
+        'form' => 'array',
     ];
-
 }

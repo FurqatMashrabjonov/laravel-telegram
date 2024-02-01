@@ -8,7 +8,6 @@ use SergiX44\Nutgram\Nutgram;
 
 class AskLanguage
 {
-
     public static function ask(Nutgram $bot): void
     {
         $bot->sendMessage(
@@ -20,5 +19,4 @@ class AskLanguage
             }
         );
     }
-
 }

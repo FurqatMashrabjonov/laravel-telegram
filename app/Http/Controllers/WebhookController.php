@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ChatRepository;
 use Illuminate\Support\Facades\Log;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -23,6 +22,7 @@ class WebhookController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
+
         return response()->noContent();
     }
 }

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'chats' => 'Чаты'
+    'chats' => 'Чаты',
 ];

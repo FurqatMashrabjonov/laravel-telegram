@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
@@ -18,16 +17,14 @@ class Settings extends Model
         'bot_full_name',
         'webhook_url',
         'webhook_was_set',
-        'bot_default_language'
+        'bot_default_language',
 
     ];
 
     public $timestamps = false;
 
-
     public function getRouteKeyName(): string
     {
         return 'key';
     }
-
 }

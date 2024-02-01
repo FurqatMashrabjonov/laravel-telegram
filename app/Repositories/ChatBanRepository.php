@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class ChatBanRepository implements ChatBanInterface
 {
-
-
     public function setBan(string $chat): void
     {
         DB::table('chats')->where('chat_id', $chat)->update(['banned' => true]);

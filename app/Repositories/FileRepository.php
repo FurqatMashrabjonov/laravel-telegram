@@ -16,8 +16,6 @@ use SergiX44\Nutgram\Telegram\Types\Media\PhotoSize;
 
 class FileRepository implements FileInterface
 {
-
-
     protected Nutgram $bot;
 
     public function store(string $type): bool
@@ -29,10 +27,11 @@ class FileRepository implements FileInterface
         }
 
         try {
-            $method = __FUNCTION__ . $modelName;
+            $method = __FUNCTION__.$modelName;
             $this->$method();
         } catch (\Exception $e) {
             Log::error($e->getMessage());
+
             return false;
         }
 
@@ -64,7 +63,7 @@ class FileRepository implements FileInterface
             $this->bot->message()->video->toArray(),
             [
                 'file_path' => $this->getFile($this->bot->message()->video->file_id)->url(),
-                'thumbnail_file_path' => $this->getFile($this->bot->message()->video->thumbnail->file_id)->url()
+                'thumbnail_file_path' => $this->getFile($this->bot->message()->video->thumbnail->file_id)->url(),
             ]), Video::class);
     }
 
@@ -74,7 +73,7 @@ class FileRepository implements FileInterface
             $this->bot->message()->audio->toArray(),
             [
                 'file_path' => $this->getFile($this->bot->message()->audio->file_id)->url(),
-                'thumbnail_file_path' => $this->getFile($this->bot->message()->audio->thumbnail->file_id)->url()
+                'thumbnail_file_path' => $this->getFile($this->bot->message()->audio->thumbnail->file_id)->url(),
             ]), Audio::class);
     }
 
@@ -84,11 +83,12 @@ class FileRepository implements FileInterface
             $this->bot->message()->document->toArray(),
             [
                 'file_path' => $this->getFile($this->bot->message()->document->file_id)->url(),
-                'thumbnail_file_path' => $this->getFile($this->bot->message()->document->thumbnail->file_id)->url()
+                'thumbnail_file_path' => $this->getFile($this->bot->message()->document->thumbnail->file_id)->url(),
             ]), Document::class);
     }
 
-    protected function storeVoice(){
+    protected function storeVoice()
+    {
         $this->storeToDB(array_merge($this->bot->message()->voice->toArray(), []), Voice::class);
     }
 
@@ -107,6 +107,7 @@ class FileRepository implements FileInterface
         if ($type == 'photo') {
             return $this->getMaxSizePhoto()->file_id;
         }
+
         return $this->bot->message()->$type->file_id;
     }
 

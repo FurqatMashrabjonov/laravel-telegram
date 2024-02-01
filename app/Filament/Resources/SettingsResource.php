@@ -14,14 +14,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
-use SergiX44\Nutgram\Nutgram;
 
 class SettingsResource extends Resource
 {
@@ -45,7 +41,7 @@ class SettingsResource extends Resource
                         TextInput::make('bot_token')
                             ->label(__('settings.bot_token'))
                             ->required()
-                            ->helperText(new HtmlString(__('settings.bot_token_helper') . ' <a href="https://t.me/BotFather" class="inline-flex items-center rounded-md dark:bg-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" target="_blank">@BotFather</a>')),
+                            ->helperText(new HtmlString(__('settings.bot_token_helper').' <a href="https://t.me/BotFather" class="inline-flex items-center rounded-md dark:bg-gray-200 bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10" target="_blank">@BotFather</a>')),
                         TextInput::make('webhook_url')
                             ->label(__('settings.webhook_url'))
                             ->required()
@@ -60,7 +56,7 @@ class SettingsResource extends Resource
                     ->aside()
                     ->schema([
                         Toggle::make('enable_language_selection')
-                            ->label(__('settings.enable_language_selection') )
+                            ->label(__('settings.enable_language_selection'))
                             ->live()
                             ->helperText(__('settings.enable_language_selection_helper')),
                         Select::make('bot_default_language')
@@ -86,7 +82,7 @@ class SettingsResource extends Resource
                             ->createOptionAction(
                                 fn (Action $action) => $action->modalWidth('3xl'),
                             )
-                            ->helperText(new HtmlString(HtmlHelper::languageSelectionMode()))
+                            ->helperText(new HtmlString(HtmlHelper::languageSelectionMode())),
                     ]),
                 Section::make(__('settings.phone_number'))
                     ->description(__('settings.phone_number_description'))
@@ -116,7 +112,7 @@ class SettingsResource extends Resource
                         'inline' => 'Inline',
                         'markup' => 'Markup',
                     ])
-                    ->alignCenter()
+                    ->alignCenter(),
             ])
             ->filters([
                 //

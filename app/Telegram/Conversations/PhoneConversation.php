@@ -11,8 +11,9 @@ use SergiX44\Nutgram\Telegram\Properties\ParseMode;
 
 class PhoneConversation extends Conversation
 {
-
-    public function __construct(protected PhoneNumberRepository $phoneNumberRepository){}
+    public function __construct(protected PhoneNumberRepository $phoneNumberRepository)
+    {
+    }
 
     public function start(Nutgram $bot): void
     {
@@ -31,8 +32,9 @@ class PhoneConversation extends Conversation
             $phoneNumber = $bot->message()->contact->phone_number;
         }
 
-        if (!preg_match('/^998\d{9}$/', $phoneNumber)) {
+        if (! preg_match('/^998\d{9}$/', $phoneNumber)) {
             $this->ask($bot);
+
             return;
         }
 

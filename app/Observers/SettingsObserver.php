@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Settings;
-use App\Telegram\Services\Webhook;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
 use Psr\Container\ContainerExceptionInterface;
@@ -27,7 +26,7 @@ class SettingsObserver
             settings('webhook_was_set') != $settings->webhook_was_set
         ) {
             if ($settings->webhook_was_set) {
-                bot($settings->bot_token)->setWebhook(generateWebhookUrl($settings->webhook_url) . route('webhook', [], false));
+                bot($settings->bot_token)->setWebhook(generateWebhookUrl($settings->webhook_url).route('webhook', [], false));
             } else {
                 bot($settings->bot_token)->deleteWebhook();
             }

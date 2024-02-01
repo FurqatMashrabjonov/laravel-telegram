@@ -7,7 +7,6 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardMarkup;
 
 class InlineKeyboards
 {
-
     public static function language()
     {
         return InlineKeyboardMarkup::make()
@@ -17,5 +16,4 @@ class InlineKeyboards
                 InlineKeyboardButton::make('🇬🇧English', callback_data: 'set_lang:en')
             );
     }
-
 }

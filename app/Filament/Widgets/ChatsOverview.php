@@ -11,7 +11,7 @@ class ChatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make(__('widgets.chats'), Chat::query()->count())
+            Stat::make(__('widgets.chats'), Chat::query()->count()),
         ];
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-
-test('text exists', function (){
+test('text exists', function () {
     $this->artisan('db:seed --class=TextSeeder');
     $this->assertDatabaseHas('texts', [
         'key' => 'start',

@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class Control extends Component
 {
-
     public bool $isRunning = false;
 
     public function mount()

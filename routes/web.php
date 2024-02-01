@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DownloadMediaController;
 use Illuminate\Support\Facades\Route;
 
 /*

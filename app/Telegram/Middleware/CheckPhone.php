@@ -8,7 +8,6 @@ use SergiX44\Nutgram\Nutgram;
 
 class CheckPhone
 {
-
     protected PhoneNumberRepository $phoneNumberRepository;
 
     public function __construct()

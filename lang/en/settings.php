@@ -1,4 +1,5 @@
 <?php
+
 //english mode
 return [
     'language_selection_mode' => 'Language selection mode',

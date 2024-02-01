@@ -4,11 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
 use App\Models\Chat;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -47,7 +46,7 @@ class ChatResource extends Resource
                 TextColumn::make('lang')->label(__('columns.lang'))->sortable()->badge(),
                 TextColumn::make('type')->label(__('columns.type'))
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'private' => 'primary',
                         'group' => 'secondary',
                         'supergroup' => 'success',
@@ -60,10 +59,10 @@ class ChatResource extends Resource
                 TextColumn::make('role')
                     ->sortable()
                     ->label(__('columns.role'))
-                    ->badge()->color(fn(string $state): string => match ($state) {
+                    ->badge()->color(fn (string $state): string => match ($state) {
                         'user' => 'primary',
                         'admin' => 'danger',
-                    })
+                    }),
             ])
             ->filters([
                 SelectFilter::make('type')
@@ -77,15 +76,15 @@ class ChatResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Action::make('ban')
-                        ->label(fn(Chat $chat): string => $chat->banned ? __('columns.unban') : __('columns.ban'))
-                        ->icon(fn(Chat $chat): string => $chat->banned ? 'heroicon-o-check' : 'heroicon-o-exclamation-triangle')
-                        ->color(fn(Chat $chat): string => $chat->banned ? 'primary' : 'danger')
+                        ->label(fn (Chat $chat): string => $chat->banned ? __('columns.unban') : __('columns.ban'))
+                        ->icon(fn (Chat $chat): string => $chat->banned ? 'heroicon-o-check' : 'heroicon-o-exclamation-triangle')
+                        ->color(fn (Chat $chat): string => $chat->banned ? 'primary' : 'danger')
                         ->requiresConfirmation()
                         ->action(function (array $data, Chat $chat): void {
-                            $chat->banned = !$chat->banned;
+                            $chat->banned = ! $chat->banned;
                             $chat->save();
                         }),
-                ])
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -112,5 +111,4 @@ class ChatResource extends Resource
     {
         return static::getModel()::count();
     }
-
 }

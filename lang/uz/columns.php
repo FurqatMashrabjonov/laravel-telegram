@@ -1,4 +1,5 @@
 <?php
+
 //uzbek language
 return [
     'id' => 'ID',

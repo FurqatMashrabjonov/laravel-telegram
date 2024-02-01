@@ -1,4 +1,5 @@
 <?php
+
 $chatRepository = new \App\Repositories\ChatRepository();
 
 test('chat exists', function () use ($chatRepository) {

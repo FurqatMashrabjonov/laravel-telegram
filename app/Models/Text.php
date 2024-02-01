@@ -17,5 +17,4 @@ class Text extends Model
     protected $casts = [
         'text' => 'array',
     ];
-
 }

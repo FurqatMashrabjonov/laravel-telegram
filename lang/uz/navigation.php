@@ -8,7 +8,7 @@ return [
     'general' => 'Umumiy',
     'telegram' => 'Telegram',
     'system' => 'Tizim',
-    'media'=> 'Media',
+    'media' => 'Media',
     'audios' => 'Audio',
     'documents' => 'Hujjatlar',
     'videos' => 'Video',

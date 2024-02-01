@@ -11,7 +11,6 @@ use SergiX44\Nutgram\Telegram\Exceptions\TelegramException;
 
 class Webhook
 {
-
     /**
      * @throws TelegramException
      * @throws NotFoundExceptionInterface
@@ -19,19 +18,19 @@ class Webhook
      * @throws GuzzleException
      * @throws JsonException
      */
-    public static function set(string $url = null, string $token = null): ?bool
+    public static function set(?string $url = null, ?string $token = null): ?bool
     {
-           if ($url === null) {
-               $url = settings('webhook_url');
-           }
+        if ($url === null) {
+            $url = settings('webhook_url');
+        }
 
-              if ($token === null) {
-                $token = settings('bot_token');
-              }
+        if ($token === null) {
+            $token = settings('bot_token');
+        }
 
-                $url = $url . route('webhook', [], false);
+        $url = $url.route('webhook', [], false);
 
-              return (new Nutgram($token))->setWebhook($url);
+        return (new Nutgram($token))->setWebhook($url);
 
     }
 
@@ -42,7 +41,7 @@ class Webhook
      * @throws GuzzleException
      * @throws JsonException
      */
-    public static function unset(string $token = null): ?bool
+    public static function unset(?string $token = null): ?bool
     {
         if ($token === null) {
             $token = settings('bot_token');
@@ -50,5 +49,4 @@ class Webhook
 
         return (new Nutgram($token))->deleteWebhook();
     }
-
 }

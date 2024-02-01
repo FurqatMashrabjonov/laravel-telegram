@@ -7,8 +7,6 @@ use App\Models\Text;
 use App\Observers\SettingsObserver;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('settings', function () use ($settings) {
-            return collect($settings)->filter(fn($value, $key) => $key !== 'id')->toArray();
+            return collect($settings)->filter(fn ($value, $key) => $key !== 'id')->toArray();
         });
 
         //Set global config token
@@ -48,5 +46,4 @@ class AppServiceProvider extends ServiceProvider
                 ->locales(['uz', 'ru', 'en']); // also accepts a closure
         });
     }
-
 }

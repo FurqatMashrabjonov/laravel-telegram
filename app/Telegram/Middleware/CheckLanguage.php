@@ -18,8 +18,9 @@ class CheckLanguage
     public function __invoke(Nutgram $bot, $next): void
     {
 
-        if (!settings('enable_language_selection')) {
+        if (! settings('enable_language_selection')) {
             $next($bot);
+
             return;
         }
 

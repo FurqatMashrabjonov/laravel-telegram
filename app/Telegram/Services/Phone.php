@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\DB;
 
 class Phone
 {
-
-    public static function get(string $chat_id){
+    public static function get(string $chat_id)
+    {
         return DB::table('chats')->where('chat_id', $chat_id)->value('phone');
     }
 
@@ -15,5 +15,4 @@ class Phone
     {
         DB::table('chats')->where('chat_id', $chat_id)->update(['phone' => $phone]);
     }
-
 }
