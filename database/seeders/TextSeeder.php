@@ -32,11 +32,44 @@ class TextSeeder extends Seeder
             [
                 'key' => 'phone.ask_phone',
                 'text' => [
-                    'en' => 'Please send your phone number',
-                    'ru' => 'Пожалуйста, отправьте свой номер телефона',
-                    'uz' => 'Iltimos, telefon raqamingizni yuboring',
+                    'en' => 'Please send your phone number.
+ <b>Phone number lenght should be 12 without +</b>
+
+ You can also send your phone number by clicking the button below.',
+                    'ru' => 'Пожалуйста, отправьте свой номер телефона.
+ <b>Длина номера телефона должна быть 12 без +</b>
+
+ Вы также можете отправить свой номер телефона, нажав на кнопку ниже.',
+                    'uz' => 'Iltimos, telefon raqamingizni yuboring.
+ <b>Telefon raqamingiz uzunligi + belgisiz 12 ta bo\'lishi kerak</b>
+
+ Siz quyidagi tugmani bosib ham telefon raqamingizni yuborishingiz mumkin.',
                 ],
-            ]
+            ],
+            [
+                'key' => 'lang.selected',
+                'text' => [
+                    'en' => 'Language selected',
+                    'ru' => 'Язык выбран',
+                    'uz' => 'Til tanlandi',
+                ],
+            ],
+            [
+                'key' => 'phone.selected',
+                'text' => [
+                    'en' => 'Phone number selected',
+                    'ru' => 'Номер телефона выбран',
+                    'uz' => 'Telefon raqami tanlandi',
+                ],
+            ],
+            [
+                'key' => 'phone.send_my_phone',
+                'text' => [
+                    'en' => '📱Send my phone number',
+                    'ru' => '📱Отправить мой номер телефона',
+                    'uz' => '📱Telefon raqamimni yuborish',
+                ],
+            ],
         ];
 
         foreach ($texts as $key => $text) {

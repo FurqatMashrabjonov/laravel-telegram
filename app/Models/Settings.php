@@ -18,6 +18,7 @@ class Settings extends Model
         'bot_full_name',
         'webhook_url',
         'webhook_was_set',
+        'bot_default_language'
 
     ];
 

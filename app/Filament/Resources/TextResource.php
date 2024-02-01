@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TextResource\Pages;
-use App\Filament\Resources\TextResource\RelationManagers;
 use App\Models\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,8 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TextResource extends Resource
 {
@@ -29,18 +26,20 @@ class TextResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')
+                Forms\Components\TextInput::make(__('columns.key'))
                     ->autofocus()
-                    ->required()
-                    ->placeholder('key'),
+                    ->required(),
                 Forms\Components\Textarea::make('text.uz')
                     ->required()
+                    ->label(__('columns.text_uz'))
                     ->placeholder('uz'),
                 Forms\Components\Textarea::make('text.ru')
                     ->required()
+                    ->label(__('columns.text_ru'))
                     ->placeholder('ru'),
                 Forms\Components\Textarea::make('text.en')
                     ->required()
+                    ->label(__('columns.text_en'))
                     ->placeholder('en'),
             ])->columns(1);
     }
@@ -50,16 +49,27 @@ class TextResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('key'),
-                TextColumn::make('text.uz')->searchable()->limit(50),
-                TextColumn::make('text.ru')->searchable()->limit(50),
-                TextColumn::make('text.en')->searchable()->limit(50),
+                TextColumn::make('text.uz')
+                    ->searchable()
+                    ->label(__('columns.text_uz'))
+                    ->limit(50),
+                TextColumn::make('text.ru')
+                    ->searchable()
+                    ->label(__('columns.text_ru'))
+                    ->limit(50),
+                TextColumn::make('text.en')
+                    ->searchable()
+                    ->label(__('columns.text_en'))
+                    ->limit(50),
 
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+               Tables\Actions\ActionGroup::make([
+                   Tables\Actions\EditAction::make(),
+               ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

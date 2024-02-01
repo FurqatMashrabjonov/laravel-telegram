@@ -2,11 +2,9 @@
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
 use App\Telegram\Actions\SetLanguage;
-use App\Telegram\Commands\Contact;
 use App\Telegram\Commands\Language;
 use App\Telegram\Commands\Phone;
 use App\Telegram\Commands\Start;
-use App\Telegram\Commands\File;
 use App\Telegram\Middleware\ChatExists;
 use App\Telegram\Middleware\CheckBanned;
 use SergiX44\Nutgram\Nutgram;
@@ -28,36 +26,36 @@ $bot->middleware(CheckBanned::class);
 $bot->onCommand('start', Start::class);
 $bot->onCommand('lang', Language::class);
 $bot->onCommand('phone', Phone::class);
-$bot->onCommand('file', File::class);
-$bot->onCommand('contact', Contact::class);
+
+
+
 
 //Set Language
 $bot->onText('🇺🇿O\'zbekcha', function (Nutgram $bot) {
     SetLanguage::set($bot->chat()->id, 'uz');
-    $bot->sendMessage('uzbek!');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });
 $bot->onText('🇷🇺Русский', function (Nutgram $bot) {
     SetLanguage::set($bot->chat()->id, 'ru');
-    $bot->sendMessage('russian!');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });
 $bot->onText('🇬🇧English', function (Nutgram $bot) {
     SetLanguage::set($bot->chat()->id, 'en');
-    $bot->sendMessage('english!');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });
-
 
 $bot->onCallbackQueryData('set_lang:uz', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'uz');
     $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
-    $bot->answerCallbackQuery(text: 'uzbekcha');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });
 $bot->onCallbackQueryData('set_lang:ru', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'ru');
     $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
-    $bot->answerCallbackQuery(text: 'russian');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });
 $bot->onCallbackQueryData('set_lang:en', function(Nutgram $bot){
     SetLanguage::set($bot->chat()->id, 'en');
     $bot->deleteMessage($bot->chat()->id, $bot->message()->message_id);
-    $bot->answerCallbackQuery(text: 'english');
+    $bot->sendMessage(text('lang.selected', lang($bot->chat()->id)));
 });

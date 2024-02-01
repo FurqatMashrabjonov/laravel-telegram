@@ -28,4 +28,5 @@ return [
     'start_bot' => 'Start bot',
     'stop_bot' => 'Stop bot',
     'restart_bot' => 'Restart bot',
+    'bot_default_language' => 'Bot default language',
 ];

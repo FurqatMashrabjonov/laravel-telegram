@@ -2,6 +2,7 @@
 
 
 use App\Models\Settings;
+use Illuminate\Support\Facades\DB;
 use SergiX44\Nutgram\Nutgram;
 
 if (!function_exists('lang')) {
@@ -58,9 +59,13 @@ if (!function_exists('settings')) {
 
 
 if (!function_exists('lang')) {
-    function lang(string $chat_id)
+    function lang(?string $chat_id = null)
     {
-        return \DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? 'uz';
+        if ($chat_id == null) {
+            return settings('bot_default_language');
+        }
+
+        return DB::table('chats')->where('chat_id', $chat_id)->value('lang') ?? settings('bot_default_language');
     }
 }
 

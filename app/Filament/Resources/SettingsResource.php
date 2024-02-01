@@ -60,9 +60,21 @@ class SettingsResource extends Resource
                     ->aside()
                     ->schema([
                         Toggle::make('enable_language_selection')
-                            ->label(__('settings.enable_language_selection') . 'TODO://default language qo\'shish kerak')
+                            ->label(__('settings.enable_language_selection') )
                             ->live()
                             ->helperText(__('settings.enable_language_selection_helper')),
+                        Select::make('bot_default_language')
+                            ->label(__('settings.bot_default_language'))
+                            ->options([
+                                'uz' => 'O\'zbekcha',
+                                'ru' => 'Русский',
+                                'en' => 'English',
+                            ])->maxWidth(MaxWidth::Medium)
+                            ->native(false)
+                            ->required()
+                            ->createOptionAction(
+                                fn (Action $action) => $action->modalWidth('3xl'),
+                            ),
                         Select::make('language_selection_mode')
                             ->label(__('settings.language_selection_mode'))
                             ->options([

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('bot_token')->nullable();
             $table->string('bot_username')->nullable();
             $table->string('bot_full_name')->nullable();
+            $table->string('bot_default_language')->default('uz');
             $table->string('webhook_url')->nullable();
             $table->boolean('webhook_was_set')->default(false);
         });

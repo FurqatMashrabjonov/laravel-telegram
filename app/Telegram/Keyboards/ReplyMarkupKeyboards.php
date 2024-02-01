@@ -20,14 +20,14 @@ class ReplyMarkupKeyboards
         );
     }
 
-    public static function phone(): ReplyKeyboardMarkup
+    public static function phone(string $lang = null): ReplyKeyboardMarkup
     {
         return ReplyKeyboardMarkup::make(
             resize_keyboard: true,
             one_time_keyboard: true
         )->addRow(
             KeyboardButton::make(
-                text: '📱Send my phone number',
+                text: text('phone.send_my_phone', lang($lang)),
                 request_contact: true
             )
         );

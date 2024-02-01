@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ChatRepository;
+use Illuminate\Support\Facades\Log;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use SergiX44\Nutgram\Nutgram;
@@ -20,7 +21,7 @@ class WebhookController extends Controller
             $bot->run();
 
         } catch (\Exception $e) {
-            $bot->sendMessage($e->getMessage());
+            Log::error($e->getMessage());
         }
         return response()->noContent();
     }

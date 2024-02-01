@@ -10,7 +10,7 @@ class Language extends Command
 {
     protected string $command = 'command';
 
-    protected ?string $description = 'Update Language';
+    protected ?string $description = 'Tilni yangilash';
 
     public function handle(Nutgram $bot): void
     {

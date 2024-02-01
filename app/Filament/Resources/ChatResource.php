@@ -4,8 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
 use App\Models\Chat;
-use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -40,13 +39,13 @@ class ChatResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('chat_id')->label('Chat ID')->searchable(),
-                TextColumn::make('first_name')->label('First Name')->searchable(),
-                TextColumn::make('last_name')->label('Last Name')->searchable(),
-                TextColumn::make('username')->label('Username')->searchable(),
-                TextColumn::make('phone_number')->label('Phone Number')->searchable(),
-                TextColumn::make('lang')->sortable()->badge(),
-                TextColumn::make('type')->label('Type')
+                TextColumn::make('chat_id')->label(__('columns.chat_id'))->searchable(),
+                TextColumn::make('first_name')->label(__('columns.first_name'))->searchable(),
+                TextColumn::make('last_name')->label(__('columns.last_name'))->searchable(),
+                TextColumn::make('username')->label(__('columns.username'))->searchable(),
+                TextColumn::make('phone_number')->label(__('columns.phone_number'))->searchable(),
+                TextColumn::make('lang')->label(__('columns.lang'))->sortable()->badge(),
+                TextColumn::make('type')->label(__('columns.type'))
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'private' => 'primary',
@@ -56,10 +55,11 @@ class ChatResource extends Resource
                     })
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Created At')
+                    ->label(__('columns.created_at'))
                     ->searchable(),
                 TextColumn::make('role')
                     ->sortable()
+                    ->label(__('columns.role'))
                     ->badge()->color(fn(string $state): string => match ($state) {
                         'user' => 'primary',
                         'admin' => 'danger',
@@ -75,17 +75,17 @@ class ChatResource extends Resource
                     ]),
             ])
             ->actions([
-                Action::make('ban')
-                    ->label(fn(Chat $chat): string => $chat->banned ? 'Blocked' : 'Allowed')
-                    ->icon(fn(Chat $chat): string => $chat->banned ? 'heroicon-o-exclamation-triangle' : 'heroicon-o-check')
-                    ->color(fn(Chat $chat): string => $chat->banned ? 'danger' : 'primary')
-                    ->requiresConfirmation()
-                    ->action(function (array $data, Chat $chat): void {
-                        $chat->banned = !$chat->banned;
-                        $chat->save();
-                    }),
-
-//                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Action::make('ban')
+                        ->label(fn(Chat $chat): string => $chat->banned ? __('columns.unban') : __('columns.ban'))
+                        ->icon(fn(Chat $chat): string => $chat->banned ? 'heroicon-o-check' : 'heroicon-o-exclamation-triangle')
+                        ->color(fn(Chat $chat): string => $chat->banned ? 'primary' : 'danger')
+                        ->requiresConfirmation()
+                        ->action(function (array $data, Chat $chat): void {
+                            $chat->banned = !$chat->banned;
+                            $chat->save();
+                        }),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

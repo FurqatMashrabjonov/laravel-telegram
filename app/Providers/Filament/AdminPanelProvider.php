@@ -24,7 +24,8 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentView;
 use Filament\Widgets;
 use FilipFonal\FilamentLogManager\FilamentLogManager;
-use FilipFonal\FilamentLogManager\Pages\Logs;
+use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use Hasnayeen\Themes\ThemesPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -38,10 +39,9 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-
         FilamentView::registerRenderHook(
             'panels::global-search.after',
-            fn (): string => Blade::render('<livewire:bot.control key=\'bot-control\' />')
+            fn(): string => Blade::render('<livewire:bot.control key=\'bot-control\' />')
         );
 
         return $panel
@@ -50,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Cyan
+                'primary' => Color::Gray
             ])
             ->favicon(asset('images/favicon.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -73,6 +73,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                SetTheme::class
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('10s')
@@ -81,6 +82,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentLogManager::make(),
+                ThemesPlugin::make()
             ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder->groups([
@@ -103,14 +105,6 @@ class AdminPanelProvider extends PanelProvider
                                 ->url('/log-viewer')
                                 ->icon('heroicon-o-document-text'),
 
-                        ]),
-                    NavigationGroup::make(__('navigation.media'))
-                        ->items([
-                            ...AudioResource::getNavigationItems(),
-                            ...DocumentResource::getNavigationItems(),
-                            ...VideoResource::getNavigationItems(),
-                            ...VoiceResource::getNavigationItems(),
-                            ...PhotoResource::getNavigationItems()
                         ]),
                 ]);
             });

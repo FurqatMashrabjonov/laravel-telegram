@@ -9,12 +9,14 @@ class Start extends Command
 {
     protected string $command = 'start';
 
-    protected ?string $description = 'Start the bot';
+    protected ?string $description = 'Botni ishga tushirish';
 
     public function handle(Nutgram $bot): void
     {
         $bot->sendMessage(
-            text: text('start', 'uz', ['name' => $bot->message()->from->first_name]),
+            text: text('main.start', 'uz', [
+                'name' => $bot->message()->from->first_name ?? $bot->message()->from->username,
+            ]),
         );
 
     }

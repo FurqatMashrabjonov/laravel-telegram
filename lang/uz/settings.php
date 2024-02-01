@@ -28,4 +28,5 @@ return [
     'start_bot' => 'Botni ishga tushirish',
     'stop_bot' => 'Botni to\'xtatish',
     'restart_bot' => 'Botni qayta ishga tushirish',
+    'bot_default_language' => 'Botning standart tili',
 ];
