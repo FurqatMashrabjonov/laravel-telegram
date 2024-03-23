@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "furqat/laravel-telegram",
     "type": "template",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "The skeleton application for the Laravel Telegram bot.",
     "keywords": [
         "laravel",
         "framework"
