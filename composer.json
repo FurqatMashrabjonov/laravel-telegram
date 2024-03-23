@@ -1,6 +1,6 @@
 {
     "name": "laravel/laravel",
-    "type": "project",
+    "type": "template",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
         "laravel",
