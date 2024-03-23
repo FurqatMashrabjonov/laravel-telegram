@@ -8,6 +8,7 @@ use App\Observers\SettingsObserver;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Settings::observe(SettingsObserver::class);
+
+        //check if the table exists
+        if (!Schema::hasTable('texts') or !Schema::hasTable('settings')) {
+            return;
+        }
 
         $texts = Text::query()->pluck('text', 'key')->toArray();
         $settings = Settings::query()->first();
