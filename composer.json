@@ -1,9 +1,17 @@
 {
     "name": "furqat/laravel-telegram",
     "type": "template",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Laravel telegram bot template",
+    "keywords": ["template", "laravel-telegram"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Furktabek Mashrabjonov",
+            "email": "mashrabjonovfurqat@gmail.com",
+            "homepage": "https://github.com/FurqatMashrabjonov",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.2",
